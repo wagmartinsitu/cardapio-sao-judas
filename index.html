@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Cardápio Festa de São Judas Tadeu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: cardápio de uma coluna, cabeçalho em faixa verde com ornamento dourado, categorias com navegação fixa, ilustração por item */
+:root{
+  --bg:#f7f5ee; --surface:#ffffff; --fg:#1d2a22; --muted:#5d6b61; --line:#dfe2d6;
+  --green:#1f4a35; --green-ink:#f3efe0; --gold:#b8892a; --gold-soft:#f1e4c3; --icon-bg:#f3ecd9; --heading:#1f4a35;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121915; --surface:#1a231e; --fg:#ebe8dc; --muted:#a3ada2; --line:#2c3830;
+  --green:#163828; --green-ink:#f3efe0; --gold:#d9ad55; --gold-soft:#3a3120; --icon-bg:#2a3229; --heading:#d9ad55; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121915; --surface:#1a231e; --fg:#ebe8dc; --muted:#a3ada2; --line:#2c3830;
+  --green:#163828; --green-ink:#f3efe0; --gold:#d9ad55; --gold-soft:#3a3120; --icon-bg:#2a3229; --heading:#d9ad55; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--green)}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header{background:var(--green);color:var(--green-ink);text-align:center}
+header .wrap{padding-block:36px 28px;display:grid;gap:10px;justify-items:center}
+.edition{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#e9d6a6;font-weight:600}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,8vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+.orn{display:flex;align-items:center;gap:10px;color:#d9ad55;width:min(260px,80%)}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:currentColor;opacity:.7}
+.motto{font-style:italic;font-size:.95rem;opacity:.9;margin:0}
+.parish{font-size:.82rem;opacity:.75;margin:0}
+
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{flex:none;text-decoration:none;color:var(--fg);font-weight:600;font-size:.88rem;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+nav a:focus-visible,nav a:hover{border-color:var(--gold);outline:none}
+
+main .wrap{padding-block:8px 32px;display:grid;gap:28px}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+h2{font-family:var(--display);font-weight:400;font-size:1.45rem;margin:18px 0 6px;color:var(--heading)}
+ul{list-style:none;margin:0;padding:0}
+ul li{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line)}
+ul li:last-child{border-bottom:0}
+.ic{flex:none;width:56px;height:56px;border-radius:50%;background:var(--icon-bg);padding:6px}
+.name{min-width:0;flex:1}
+.name b{font-weight:600}
+.name span{display:block;font-size:.85rem;color:var(--muted)}
+.price{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.price sup{font-size:.7em;font-weight:600;color:var(--muted);margin-right:2px;vertical-align:baseline}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:12px}
+.card h2{margin:0}
+.card ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.card ol li::marker{color:var(--gold);font-weight:700}
+.tag{display:inline-block;background:var(--gold-soft);color:var(--fg);font-weight:700;border-radius:6px;padding:1px 8px;font-variant-numeric:tabular-nums}
+.note{margin:0;color:var(--muted);font-size:.9rem}
+
+footer{border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.85rem}
+footer .wrap{padding-block:20px 32px;display:grid;gap:4px}
+footer strong{color:var(--fg)}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+
+/* Seleção e soma */
+body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.side{display:grid;justify-items:end;gap:6px;flex:none}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:700 1.15rem/1 var(--body);cursor:pointer;display:grid;place-items:center;padding:0}
+.step button.add{background:var(--green);border-color:var(--green);color:#f3efe0}
+.step button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.step .qty{min-width:1.4em;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+ul li.on{background:linear-gradient(90deg,transparent,var(--gold-soft) 30%,transparent)}
+.step .minus,.step .qty{visibility:hidden}
+li.on .step .minus,li.on .step .qty{visibility:visible}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--green);color:#f3efe0;box-shadow:0 -6px 20px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bar .wrap{display:grid;gap:10px;padding-block:12px}
+.bar-row{display:flex;align-items:center;gap:12px}
+.bar-info{flex:1;min-width:0}
+.bar-info small{display:block;font-size:.8rem;opacity:.8}
+.bar-total{font-family:var(--display);font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.bar button{font:600 .9rem var(--body);border-radius:999px;padding:9px 14px;cursor:pointer;border:1px solid rgba(243,239,224,.5);background:transparent;color:#f3efe0}
+.bar button.primary{background:#d9ad55;border-color:#d9ad55;color:#1d2a22}
+.bar button:disabled{opacity:.4;cursor:default}
+.bar button:focus-visible{outline:2px solid #f3efe0;outline-offset:2px}
+.summary{color:#f3efe0;max-height:45vh;overflow-y:auto;border-top:1px solid rgba(243,239,224,.25);padding-top:8px}
+.summary table{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+.summary td{padding:5px 0;vertical-align:top}
+.summary td.q{width:2.6em;opacity:.85}
+.summary td.v{text-align:right;white-space:nowrap}
+.summary .clear{margin-top:8px}
+.ask[hidden],.summary[hidden]{display:none}
+.fee-opt{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.9rem;cursor:pointer}
+.fee-opt input{width:18px;height:18px;accent-color:#d9ad55}
+.ask{position:fixed;inset:0;z-index:20;background:rgba(10,20,14,.55);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.ask-box{background:var(--surface);color:var(--fg);border-radius:16px;padding:22px;max-width:380px;width:100%;display:grid;gap:12px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.ask-box h3{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0;color:var(--heading)}
+.ask-box p{margin:0;color:var(--muted)}
+.ask-box strong{color:var(--fg)}
+.ask-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.ask-actions button{font:600 .92rem var(--body);border-radius:999px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.ask-actions button.yes{background:var(--green);border-color:var(--green);color:#f3efe0}
+.ask-actions button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.summary-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;font-size:.8rem;opacity:.9}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Cachorro-quente -->
+    <symbol id="i-hotdog" viewBox="0 0 48 48">
+      <rect x="6" y="19" width="36" height="12" rx="6" fill="#e8b062"/>
+      <rect x="3" y="18" width="42" height="9" rx="4.5" fill="#b8462d"/>
+      <path d="M8 22.5l3.5-2 3.5 2 3.5-2 3.5 2 3.5-2 3.5 2 3.5-2 3.5 2 3.5-2" fill="none" stroke="#f6c531" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="6" y="25" width="36" height="11" rx="5.5" fill="#d48f3a"/>
+    </symbol>
+    <symbol id="i-hotdog2" viewBox="0 0 48 48">
+      <use href="#i-hotdog" width="48" height="48" transform="translate(2 -6) scale(.85)"/>
+      <use href="#i-hotdog" width="48" height="48" transform="translate(6 14) scale(.85)"/>
+    </symbol>
+    <!-- Hambúrguer -->
+    <symbol id="i-burger" viewBox="0 0 48 48">
+      <path d="M8 21c0-8 7-13 16-13s16 5 16 13z" fill="#e3a14f"/>
+      <g fill="#fbeccb"><ellipse cx="18" cy="13" rx="1.4" ry=".8"/><ellipse cx="25" cy="11" rx="1.4" ry=".8"/><ellipse cx="31" cy="15" rx="1.4" ry=".8"/><ellipse cx="22" cy="17" rx="1.4" ry=".8"/></g>
+      <path d="M6 23q3-3 6 0t6 0 6 0 6 0 6 0 6 0v2H6z" fill="#5fae45"/>
+      <path d="M7 25h34l-6 5-5-3H7z" fill="#f7c33a"/>
+      <rect x="7" y="26" width="34" height="6" rx="3" fill="#7a3d22"/>
+      <path d="M8 33h32v2a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5z" fill="#d48f3a"/>
+    </symbol>
+    <!-- Lanche de pernil -->
+    <symbol id="i-pernil" viewBox="0 0 48 48">
+      <path d="M4 22c0-6 8-9 20-9s20 3 20 9z" fill="#e3a14f"/>
+      <path d="M8 16l3-2M16 14l3-1.5M26 13.5l3 1M34 15l3 2" stroke="#c07a2c" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M3 23q4 4 8 0t8 0 8 0 8 0 8 0v4H3z" fill="#9c4a2b"/>
+      <path d="M5 26h38" stroke="#e8e2f0" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round"/>
+      <path d="M4 27h40v3c0 4-8 6-20 6S4 34 4 30z" fill="#d48f3a"/>
+    </symbol>
+    <!-- Pastel -->
+    <symbol id="i-pastel" viewBox="0 0 48 48">
+      <rect x="5" y="12" width="38" height="24" rx="4" fill="#e5a948"/>
+      <rect x="9" y="16" width="30" height="16" rx="3" fill="#f0c063"/>
+      <path d="M7 14v20M41 14v20M7 14h34M7 34h34" stroke="#c7832c" stroke-width="2" stroke-dasharray="1.6 2.4" stroke-linecap="round"/>
+      <g fill="#d99a3d"><circle cx="17" cy="21" r="1.4"/><circle cx="28" cy="26" r="1.6"/><circle cx="33" cy="20" r="1.2"/></g>
+    </symbol>
+    <!-- Espetinho -->
+    <symbol id="i-espeto" viewBox="0 0 48 48">
+      <path d="M6 42L42 6" stroke="#b9925d" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="11" y="27" width="10" height="10" rx="3" transform="rotate(-45 16 32)" fill="#8b3f24"/>
+      <rect x="18.5" y="22" width="7" height="7" rx="2" transform="rotate(-45 22 25.5)" fill="#5fae45"/>
+      <rect x="22" y="15" width="10" height="10" rx="3" transform="rotate(-45 27 20)" fill="#a24d2a"/>
+      <rect x="29.5" y="11" width="7" height="7" rx="2" transform="rotate(-45 33 14.5)" fill="#e2463a"/>
+    </symbol>
+    <!-- Pizza pedaço -->
+    <symbol id="i-pizza1" viewBox="0 0 48 48">
+      <path d="M24 44L6 10q18-8 36 0z" fill="#f6c94a"/>
+      <path d="M6 10q18-8 36 0l-2 4q-16-7-32 0z" fill="#d9913c"/>
+      <g fill="#c8382c"><circle cx="20" cy="18" r="3"/><circle cx="30" cy="20" r="3"/><circle cx="24" cy="30" r="2.6"/></g>
+      <g fill="#3f8f3a"><circle cx="16" cy="25" r="1.2"/><circle cx="29" cy="28" r="1.2"/></g>
+    </symbol>
+    <!-- Pizza inteira -->
+    <symbol id="i-pizza" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20" fill="#d9913c"/>
+      <circle cx="24" cy="24" r="16.5" fill="#f6c94a"/>
+      <path d="M24 7.5v33M7.5 24h33M12.3 12.3l23.4 23.4M35.7 12.3L12.3 35.7" stroke="#e3ad3e" stroke-width="1.2"/>
+      <g fill="#c8382c"><circle cx="18" cy="15" r="2.6"/><circle cx="31" cy="17" r="2.6"/><circle cx="16" cy="29" r="2.6"/><circle cx="29" cy="31" r="2.6"/><circle cx="24" cy="23" r="2.2"/></g>
+    </symbol>
+    <!-- Macarrão -->
+    <symbol id="i-macarrao" viewBox="0 0 48 48">
+      <path d="M10 22c1-6 6-10 14-10s13 4 14 10z" fill="#f3d27a"/>
+      <path d="M13 21c2-5 5-6 8-3s6 2 8-1 5-2 7 3M15 17c3-3 6-3 9 0s6 2 8-1" fill="none" stroke="#e1b54d" stroke-width="1.6" stroke-linecap="round"/>
+      <ellipse cx="24" cy="16" rx="6" ry="3" fill="#c8382c"/>
+      <circle cx="22" cy="15" r="1" fill="#3f8f3a"/>
+      <path d="M5 22h38a19 14 0 0 1-38 0z" fill="#3c6e9e"/>
+      <path d="M5 22h38" stroke="#2c5479" stroke-width="2"/>
+    </symbol>
+    <!-- Nhoque -->
+    <symbol id="i-nhoque" viewBox="0 0 48 48">
+      <path d="M10 22c1-6 6-10 14-10s13 4 14 10z" fill="#c8382c"/>
+      <g fill="#f4dd98"><ellipse cx="17" cy="18" rx="3.2" ry="2.2"/><ellipse cx="24" cy="15" rx="3.2" ry="2.2"/><ellipse cx="31" cy="18" rx="3.2" ry="2.2"/><ellipse cx="21" cy="20.5" rx="3" ry="2"/><ellipse cx="28" cy="20.5" rx="3" ry="2"/></g>
+      <circle cx="26" cy="13.5" r="1.1" fill="#3f8f3a"/>
+      <path d="M5 22h38a19 14 0 0 1-38 0z" fill="#e7e2d4"/>
+      <path d="M5 22h38" stroke="#c9c2ae" stroke-width="2"/>
+    </symbol>
+    <!-- Cuscuz -->
+    <symbol id="i-cuscuz" viewBox="0 0 48 48">
+      <ellipse cx="24" cy="38" rx="20" ry="4" fill="#d9d2bf"/>
+      <path d="M7 37c0-14 7-25 17-25s17 11 17 25z" fill="#f0bf45"/>
+      <ellipse cx="24" cy="14" rx="5" ry="2" fill="#e0a933"/>
+      <g fill="#c8382c"><circle cx="13" cy="30" r="2.6"/><circle cx="35" cy="30" r="2.6"/></g>
+      <g fill="#fff"><circle cx="20" cy="24" r="2.4"/><circle cx="28" cy="24" r="2.4"/></g>
+      <g fill="#f6c531"><circle cx="20" cy="24" r="1"/><circle cx="28" cy="24" r="1"/></g>
+      <g fill="#3f8f3a"><circle cx="24" cy="32" r="1.4"/><circle cx="17" cy="35" r="1.1"/><circle cx="31" cy="35" r="1.1"/></g>
+    </symbol>
+    <symbol id="i-cuscuz1" viewBox="0 0 48 48">
+      <ellipse cx="24" cy="38" rx="14" ry="3.5" fill="#d9d2bf"/>
+      <path d="M13 37c0-10 5-17 11-17s11 7 11 17z" fill="#f0bf45"/>
+      <circle cx="24" cy="27" r="2.2" fill="#fff"/><circle cx="24" cy="27" r="1" fill="#f6c531"/>
+      <circle cx="18" cy="33" r="2" fill="#c8382c"/><circle cx="30" cy="33" r="2" fill="#c8382c"/>
+    </symbol>
+    <!-- Batata frita -->
+    <symbol id="i-fritas" viewBox="0 0 48 48">
+      <g fill="#f6c94a" stroke="#e0a933" stroke-width=".8">
+        <rect x="13" y="7" width="4" height="22" rx="1" transform="rotate(-10 15 18)"/>
+        <rect x="19" y="4" width="4" height="24" rx="1" transform="rotate(-3 21 16)"/>
+        <rect x="25" y="5" width="4" height="23" rx="1" transform="rotate(4 27 16)"/>
+        <rect x="31" y="8" width="4" height="21" rx="1" transform="rotate(11 33 18)"/>
+        <rect x="22" y="9" width="4" height="20" rx="1"/>
+      </g>
+      <path d="M10 20h28l-3 23H13z" fill="#d23b2e"/>
+      <path d="M10 20q14 8 28 0" fill="#b32e24"/>
+    </symbol>
+    <symbol id="i-cheddar" viewBox="0 0 48 48">
+      <use href="#i-fritas" width="48" height="48"/>
+      <path d="M12 14q4-4 8 0t8-1 8 2v5q-2 3-3 0t-4 1-3 4-3-3-4 1-3-3-2 1z" fill="#f08c1c"/>
+    </symbol>
+    <!-- Porção de frango -->
+    <symbol id="i-frango" viewBox="0 0 48 48">
+      <path d="M28 8c8 0 13 6 11 13-2 6-9 9-15 8l-7 7-4-4 7-7c-2-7 1-17 8-17z" fill="#c97b33"/>
+      <path d="M30 12c4 0 6 3 5 6" fill="none" stroke="#e5a55a" stroke-width="2.4" stroke-linecap="round"/>
+      <rect x="9" y="32" width="6" height="5" rx="1.2" transform="rotate(-45 12 34.5)" fill="#f4ecd8"/>
+      <circle cx="8" cy="36" r="3" fill="#f4ecd8"/><circle cx="12" cy="40" r="3" fill="#f4ecd8"/>
+    </symbol>
+    <!-- Milho -->
+    <symbol id="i-milho" viewBox="0 0 48 48">
+      <path d="M24 44c-10-6-14-20-10-30 3 10 6 18 10 30z" fill="#5fae45"/>
+      <path d="M24 44c10-6 14-20 10-30-3 10-6 18-10 30z" fill="#4c9a38"/>
+      <ellipse cx="24" cy="21" rx="7" ry="16" fill="#f6c531"/>
+      <path d="M18 14h12M17 19h14M17 24h14M18 29h12M20.5 6v30M24 5v32M27.5 6v30" stroke="#e0a933" stroke-width="1.1"/>
+      <path d="M24 44c-6-5-9-12-9-18 4 6 6 11 9 18z" fill="#6cbf52"/>
+    </symbol>
+    <!-- Crepe -->
+    <symbol id="i-crepe" viewBox="0 0 48 48">
+      <path d="M8 10l16 34L40 10q-16-6-32 0z" fill="#e8b062"/>
+      <path d="M8 10q16-6 32 0-16 5-32 0z" fill="#5a3320"/>
+      <path d="M12 9.5q4 2 6 0M22 8q3 2 6 0M31 9q3 2 6 0" stroke="#7b4a2f" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M8 10l16 34-6-31z" fill="#d6973f"/>
+      <path d="M17 22l8 3M20 31l6 2" stroke="#c7832c" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <!-- Cesto morango/uva -->
+    <symbol id="i-cesto" viewBox="0 0 48 48">
+      <path d="M14 20c-1-4 2-7 5-6 1-4 7-4 8 0 3-2 7 0 6 5" fill="#3f8f3a"/>
+      <g fill="#d6303a"><path d="M15 18c3-2 7 0 6 4s-3 6-4 6-3-3-3-6z"/><path d="M25 16c3-2 7 0 6 4s-3 6-4 6-3-3-3-6z"/><path d="M20 22c3-2 7 0 6 4s-3 6-4 6-3-3-3-6z"/></g>
+      <g fill="#7a5b2f"><circle cx="31" cy="23" r="2.6"/><circle cx="35" cy="21" r="2.6"/><circle cx="33" cy="26" r="2.6"/></g>
+      <path d="M8 26h32l-4 16H12z" fill="#c38a45"/>
+      <path d="M9.5 31h29M11 36.5h26M16 26v16M24 26v16M32 26v16" stroke="#a46f30" stroke-width="1.3"/>
+      <rect x="7" y="24" width="34" height="4" rx="2" fill="#d49b55"/>
+    </symbol>
+    <!-- Doces -->
+    <symbol id="i-doces" viewBox="0 0 48 48">
+      <path d="M6 18l7-6v14zM34 12l7 6-7 8z" fill="#e7518a"/>
+      <ellipse cx="23.5" cy="19" rx="11" ry="7.5" fill="#f278a8"/>
+      <path d="M17 14l4 10M23 12l4 13M29 13l3 9" stroke="#fde0ec" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M14 34a8 8 0 0 0 16 0z" fill="#f4ecd8"/>
+      <circle cx="22" cy="31" r="7" fill="#4a2a1a"/>
+      <g fill="#f6c531"><rect x="18" y="27" width="2" height="1" rx=".5"/><rect x="23" y="26" width="2" height="1" rx=".5"/><rect x="25" y="31" width="2" height="1" rx=".5"/><rect x="19" y="32" width="2" height="1" rx=".5"/></g>
+      <g fill="#e7518a"><rect x="21" y="29" width="2" height="1" rx=".5"/><rect x="24" y="34" width="2" height="1" rx=".5"/></g>
+      <circle cx="37" cy="34" r="6" fill="#4a2a1a"/>
+      <path d="M33 34h8" stroke="#fff" stroke-width="1.6" stroke-dasharray="1.5 1.5"/>
+    </symbol>
+    <!-- Água -->
+    <symbol id="i-agua" viewBox="0 0 48 48">
+      <rect x="20" y="3" width="8" height="5" rx="1.5" fill="#2d6fb7"/>
+      <path d="M19 8h10l2 5c3 2 3 4 3 7v20a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V20c0-3 0-5 3-7z" fill="#bfe1f6"/>
+      <rect x="14" y="22" width="20" height="9" fill="#3a8ad1"/>
+      <path d="M17 34v6M17 14q-1 3-1 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".8"/>
+    </symbol>
+    <!-- Refrigerante -->
+    <symbol id="i-refri" viewBox="0 0 48 48">
+      <path d="M15 8h18l1 3v28l-1 3H15l-1-3V11z" fill="#d8323b"/>
+      <rect x="15" y="5" width="18" height="4" rx="1.5" fill="#bfc6cc"/>
+      <rect x="15" y="40" width="18" height="3" rx="1.5" fill="#bfc6cc"/>
+      <path d="M14 22q10-5 20 2v6q-10-7-20-2z" fill="#fff"/>
+      <path d="M18 12v24" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".35"/>
+    </symbol>
+    <!-- Suco -->
+    <symbol id="i-suco" viewBox="0 0 48 48">
+      <path d="M30 4l-5 18" stroke="#2fa36b" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M12 14h24l-3 28H15z" fill="#e9f3f6" opacity=".9"/>
+      <path d="M13.2 20h21.6l-2.3 22H15.5z" fill="#f7a32b"/>
+      <path d="M13.2 20h21.6" stroke="#fbc76b" stroke-width="1.5"/>
+      <circle cx="35" cy="15" r="6" fill="#f7a32b" stroke="#f0c063" stroke-width="1.5"/>
+      <path d="M35 9v12M29 15h12M30.8 10.8l8.4 8.4M39.2 10.8l-8.4 8.4" stroke="#fbd28a" stroke-width=".9"/>
+    </symbol>
+    <!-- Brincadeiras (pescaria) -->
+    <symbol id="i-brinca" viewBox="0 0 48 48">
+      <path d="M8 6q18 4 18 18" fill="none" stroke="#7a5b2f" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M26 24v6" stroke="#5d6b61" stroke-width="1.2"/>
+      <path d="M12 34q8-9 18-2l6-5v14l-6-5q-10 7-18-2z" fill="#3a8ad1"/>
+      <path d="M22 29q2 5 0 9" stroke="#bfe1f6" stroke-width="1.4" fill="none"/>
+      <circle cx="16" cy="33" r="1.4" fill="#fff"/>
+      <g fill="#f6c531"><circle cx="40" cy="10" r="2"/><circle cx="36" cy="16" r="1.4"/></g>
+      <circle cx="42" cy="18" r="1.2" fill="#e7518a"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <div class="edition">68ª edição · 2026</div>
+    <h1>Festa de São Judas Tadeu</h1>
+    <div class="orn">✦</div>
+    <p class="motto">“São Judas Tadeu, aumenta nossa fé!”</p>
+    <p class="parish">Paróquia São Judas Tadeu · Itu/SP</p>
+  </div>
+</header>
+
+<nav aria-label="Categorias">
+  <div class="wrap">
+    <a href="#lanches">Lanches</a>
+    <a href="#pratos">Pratos e porções</a>
+    <a href="#doces">Doces</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#brincadeiras">Brincadeiras</a>
+    <a href="#cartao">Cartão</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <section id="lanches">
+      <h2>Lanches</h2>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-hotdog"/></svg><div class="name"><b>Cachorro-quente simples</b></div><div class="price"><sup>R$</sup>14,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-hotdog2"/></svg><div class="name"><b>Cachorro-quente duplo</b></div><div class="price"><sup>R$</sup>16,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-burger"/></svg><div class="name"><b>Hambúrguer</b></div><div class="price"><sup>R$</sup>20,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pernil"/></svg><div class="name"><b>Lanche de pernil</b></div><div class="price"><sup>R$</sup>17,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pastel"/></svg><div class="name"><b>Pastel</b><span>Carne ou queijo</span></div><div class="price"><sup>R$</sup>12,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-espeto"/></svg><div class="name"><b>Espetinho</b><span>Carne, frango ou linguiça</span></div><div class="price"><sup>R$</sup>12,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pizza1"/></svg><div class="name"><b>Pizza pedaço</b></div><div class="price"><sup>R$</sup>12,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pizza"/></svg><div class="name"><b>Pizza inteira</b></div><div class="price"><sup>R$</sup>50,00</div></li>
+      </ul>
+    </section>
+
+    <section id="pratos">
+      <h2>Pratos e porções</h2>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-macarrao"/></svg><div class="name"><b>Macarrão</b><span>Individual</span></div><div class="price"><sup>R$</sup>16,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-nhoque"/></svg><div class="name"><b>Nhoque</b><span>Individual</span></div><div class="price"><sup>R$</sup>17,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cuscuz1"/></svg><div class="name"><b>Cuscuz individual</b></div><div class="price"><sup>R$</sup>6,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cuscuz"/></svg><div class="name"><b>Cuscuz inteiro</b></div><div class="price"><sup>R$</sup>20,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-fritas"/></svg><div class="name"><b>Batata frita</b></div><div class="price"><sup>R$</sup>8,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cheddar"/></svg><div class="name"><b>Batata frita com cheddar</b></div><div class="price"><sup>R$</sup>12,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-frango"/></svg><div class="name"><b>Porção de frango</b></div><div class="price"><sup>R$</sup>20,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-milho"/></svg><div class="name"><b>Milho verde</b><span>Pote ou espiga</span></div><div class="price"><sup>R$</sup>11,00</div></li>
+      </ul>
+    </section>
+
+    <section id="doces">
+      <h2>Doces</h2>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-crepe"/></svg><div class="name"><b>Crepe</b><span>Queijo, presunto e queijo, romeu e julieta ou chocolate</span></div><div class="price"><sup>R$</sup>10,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cesto"/></svg><div class="name"><b>Cesto</b><span>Morango ou uva</span></div><div class="price"><sup>R$</sup>16,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-doces"/></svg><div class="name"><b>Doces diversos</b></div><div class="price"><sup>R$</sup>6,00</div></li>
+      </ul>
+    </section>
+
+    <section id="bebidas">
+      <h2>Bebidas</h2>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-agua"/></svg><div class="name"><b>Água</b><span>Com ou sem gás</span></div><div class="price"><sup>R$</sup>5,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-refri"/></svg><div class="name"><b>Refrigerante</b></div><div class="price"><sup>R$</sup>7,00</div></li>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-suco"/></svg><div class="name"><b>Sucos diversos</b></div><div class="price"><sup>R$</sup>7,00</div></li>
+      </ul>
+    </section>
+
+    <section id="brincadeiras">
+      <h2>Brincadeiras</h2>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-brinca"/></svg><div class="name"><b>Pescaria, Giro Maluco ou Pintura Facial</b><span>Valor por brincadeira</span></div><div class="price"><sup>R$</sup>5,00</div></li>
+      </ul>
+    </section>
+
+    <section id="cartao" class="card">
+      <h2>Cartão de consumo</h2>
+      <ol>
+        <li>Retire seu cartão no caixa. Taxa de habilitação: <span class="tag">R$ 5,00</span></li>
+        <li>Carregue o valor que quiser e use nas barracas.</li>
+        <li>O mesmo cartão vale em todos os dias da festa.</li>
+        <li>No fim, devolva o cartão na barraca de bebidas e ganhe um refrigerante, suco ou água.</li>
+      </ol>
+      <p class="note">O saldo não utilizado não é devolvido. Dúvidas? Procure um dos caixas.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Paróquia São Judas Tadeu</strong>
+    <span>Praça Júlio de Mesquita, 45 · Rancho Grande · Itu/SP</span>
+    <span>Juntos fazemos uma festa ainda mais especial!</span>
+  </div>
+</footer>
+
+<div class="ask" id="ask" hidden>
+  <div class="ask-box" role="dialog" aria-modal="true" aria-labelledby="ask-title">
+    <h3 id="ask-title">Vai precisar do cartão de consumo?</h3>
+    <p>Quem ainda não tem o cartão paga uma taxa de habilitação de <strong>R$ 5,00</strong>. Quer incluir esse valor na soma?</p>
+    <div class="ask-actions">
+      <button type="button" id="ask-no">Não, já tenho</button>
+      <button type="button" id="ask-yes" class="yes">Sim, incluir R$ 5,00</button>
+    </div>
+  </div>
+</div>
+
+<div class="bar" role="region" aria-label="Seu pedido">
+  <div class="wrap">
+    <div class="summary" id="summary" hidden>
+      <table><tbody id="summary-body"></tbody></table>
+      <label class="fee-opt"><input type="checkbox" id="fee"> Incluir taxa do cartão de consumo (R$ 5,00)</label>
+      <div class="summary-actions">
+        <span>Valores apenas para conferência. O pagamento é feito com o cartão de consumo.</span>
+        <button type="button" id="clear">Limpar tudo</button>
+      </div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-info">
+        <small id="count">Toque em + para somar os itens</small>
+        <div class="bar-total" id="total" aria-live="polite">R$ 0,00</div>
+      </div>
+      <button type="button" class="primary" id="toggle" disabled aria-expanded="false" aria-controls="summary">Ver itens</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const KEY = 'festa-sjt-2026-pedido';
+  const fmt = v => 'R$ ' + v.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const FEE = 5;
+  const items = [];
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  let fee = !!saved._fee;
+  let asked = !!saved._asked;
+
+  document.querySelectorAll('main ul li').forEach((li, i) => {
+    const name = li.querySelector('.name b').textContent.trim();
+    const priceEl = li.querySelector('.price');
+    const price = parseFloat(priceEl.textContent.replace('R$', '').replace('.', '').replace(',', '.'));
+    const id = 'p' + i;
+    const side = document.createElement('div');
+    side.className = 'side';
+    li.insertBefore(side, priceEl);
+    side.appendChild(priceEl);
+    const step = document.createElement('div');
+    step.className = 'step';
+    step.innerHTML =
+      '<button type="button" class="minus" aria-label="Tirar um ' + name + '">−</button>' +
+      '<span class="qty" aria-live="polite">0</span>' +
+      '<button type="button" class="add" aria-label="Adicionar um ' + name + '">+</button>';
+    side.appendChild(step);
+    const item = { id, name, price, qty: Math.max(0, parseInt(saved[id], 10) || 0), li, qtyEl: step.querySelector('.qty') };
+    step.querySelector('.add').addEventListener('click', () => {
+      const first = items.every(x => x.qty === 0) && !asked;
+      item.qty++; render();
+      if (first) openAsk();
+    });
+    step.querySelector('.minus').addEventListener('click', () => { if (item.qty > 0) item.qty--; render(); });
+    items.push(item);
+  });
+
+  const totalEl = document.getElementById('total');
+  const countEl = document.getElementById('count');
+  const toggle = document.getElementById('toggle');
+  const summary = document.getElementById('summary');
+  const body = document.getElementById('summary-body');
+  const feeBox = document.getElementById('fee');
+
+  function render(){
+    let total = 0, count = 0;
+    const store = {};
+    body.innerHTML = '';
+    items.forEach(it => {
+      it.qtyEl.textContent = it.qty;
+      it.li.classList.toggle('on', it.qty > 0);
+      if (it.qty > 0) {
+        total += it.qty * it.price;
+        count += it.qty;
+        store[it.id] = it.qty;
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td class="q">' + it.qty + '×</td><td></td><td class="v">' + fmt(it.qty * it.price) + '</td>';
+        tr.children[1].textContent = it.name;
+        body.appendChild(tr);
+      }
+    });
+    if (fee && count > 0) {
+      total += FEE;
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td class="q">1×</td><td>Taxa do cartão de consumo</td><td class="v">' + fmt(FEE) + '</td>';
+      body.appendChild(tr);
+    }
+    feeBox.checked = fee;
+    store._fee = fee; store._asked = asked;
+    totalEl.textContent = fmt(total);
+    countEl.textContent = count === 0 ? 'Toque em + para somar os itens' : count + (count === 1 ? ' item selecionado' : ' itens selecionados');
+    toggle.disabled = count === 0;
+    if (count === 0) { summary.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Ver itens'; }
+    try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {}
+  }
+
+  toggle.addEventListener('click', () => {
+    summary.hidden = !summary.hidden;
+    toggle.setAttribute('aria-expanded', String(!summary.hidden));
+    toggle.textContent = summary.hidden ? 'Ver itens' : 'Fechar';
+  });
+  document.getElementById('clear').addEventListener('click', () => {
+    items.forEach(it => it.qty = 0);
+    fee = false; asked = false;
+    render();
+  });
+
+  const ask = document.getElementById('ask');
+  function openAsk(){ ask.hidden = false; document.getElementById('ask-yes').focus(); }
+  function answer(v){ fee = v; asked = true; ask.hidden = true; render(); }
+  document.getElementById('ask-yes').addEventListener('click', () => answer(true));
+  document.getElementById('ask-no').addEventListener('click', () => answer(false));
+  ask.addEventListener('click', e => { if (e.target === ask) answer(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !ask.hidden) answer(false); });
+  feeBox.addEventListener('change', () => { fee = feeBox.checked; asked = true; render(); });
+  render();
+})();
+</script>
+</body>
+</html>
