@@ -83,7 +83,7 @@ li.on .step .minus,li.on .step .qty{visibility:visible}
 
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--green);color:#f3efe0;box-shadow:0 -6px 20px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
 .bar .wrap{display:grid;gap:10px;padding-block:12px}
-.bar-row{display:flex;align-items:center;gap:12px}
+.bar-row{display:flex;align-items:center;gap:8px}
 .bar-info{flex:1;min-width:0}
 .bar-info small{display:block;font-size:.8rem;opacity:.8}
 .bar-total{font-family:var(--display);font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
@@ -420,7 +420,6 @@ li.on .step .minus,li.on .step .qty{visibility:visible}
       <label class="fee-opt"><input type="checkbox" id="fee"> Incluir taxa do cartão de consumo (R$ 5,00)</label>
       <div class="summary-actions">
         <span>Valores apenas para conferência. O pagamento é feito com o cartão de consumo.</span>
-        <button type="button" id="clear">Limpar tudo</button>
       </div>
     </div>
     <div class="bar-row">
@@ -428,6 +427,7 @@ li.on .step .minus,li.on .step .qty{visibility:visible}
         <small id="count">Toque em + para somar os itens</small>
         <div class="bar-total" id="total" aria-live="polite">R$ 0,00</div>
       </div>
+      <button type="button" id="clear" disabled>Zerar</button>
       <button type="button" class="primary" id="toggle" disabled aria-expanded="false" aria-controls="summary">Ver itens</button>
     </div>
   </div>
@@ -505,6 +505,7 @@ li.on .step .minus,li.on .step .qty{visibility:visible}
     totalEl.textContent = fmt(total);
     countEl.textContent = count === 0 ? 'Toque em + para somar os itens' : count + (count === 1 ? ' item selecionado' : ' itens selecionados');
     toggle.disabled = count === 0;
+    document.getElementById('clear').disabled = count === 0;
     if (count === 0) { summary.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Ver itens'; }
     try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {}
   }
